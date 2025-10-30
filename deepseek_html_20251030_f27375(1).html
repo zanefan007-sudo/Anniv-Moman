@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Joyeux Anniversaire Maman !</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, #f9d5e5, #eeac99);
+            color: #5d4037;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        .container {
+            max-width: 800px;
+            text-align: center;
+            z-index: 10;
+            background-color: rgba(255, 255, 255, 0.85);
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            backdrop-filter: blur(5px);
+            margin: 20px;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            color: #d81b60;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            font-size: 2rem;
+            margin-bottom: 30px;
+            color: #5d4037;
+        }
+
+        .message {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            text-align: left;
+        }
+
+        .signature {
+            font-style: italic;
+            font-size: 1.3rem;
+            margin-top: 40px;
+            color: #d81b60;
+        }
+
+        .cake-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .cake {
+            position: absolute;
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FFD54F" d="M50 20 L90 50 L90 80 L10 80 L10 50 Z"/><path fill="%23FFB74D" d="M50 20 L90 50 L10 50 Z"/><circle cx="30" cy="35" r="5" fill="%23E57373"/><circle cx="50" cy="30" r="5" fill="%23E57373"/><circle cx="70" cy="35" r="5" fill="%23E57373"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+            }
+            25% {
+                transform: translate(100px, 100px) rotate(90deg);
+            }
+            50% {
+                transform: translate(200px, 50px) rotate(180deg);
+            }
+            75% {
+                transform: translate(100px, 150px) rotate(270deg);
+            }
+            100% {
+                transform: translate(0, 0) rotate(360deg);
+            }
+        }
+
+        .balloon {
+            position: absolute;
+            width: 50px;
+            height: 70px;
+            border-radius: 50%;
+            animation: balloon-float 20s infinite ease-in-out;
+        }
+
+        .balloon:before {
+            content: "";
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 2px;
+            height: 15px;
+            background-color: rgba(0, 0, 0, 0.3);
+        }
+
+        .balloon:nth-child(odd) {
+            background: radial-gradient(circle at 30% 30%, #ff5252, #d32f2f);
+        }
+
+        .balloon:nth-child(even) {
+            background: radial-gradient(circle at 30% 30%, #2196f3, #0d47a1);
+        }
+
+        @keyframes balloon-float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+            }
+            50% {
+                transform: translateY(-30px) rotate(5deg);
+            }
+        }
+
+        .hearts {
+            position: absolute;
+            font-size: 24px;
+            color: #e91e63;
+            animation: heart-float 12s infinite linear;
+        }
+
+        @keyframes heart-float {
+            0% {
+                transform: translate(0, 0) rotate(0deg);
+                opacity: 1;
+            }
+            100% {
+                transform: translate(100px, -100vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            h2 {
+                font-size: 1.5rem;
+            }
+            .container {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="cake-container" id="cakeContainer"></div>
+    
+    <div class="container">
+        <h1>Joyeux Anniversaire Maman !</h1>
+        <h2>Une journée spéciale pour une personne exceptionnelle</h2>
+        
+        <div class="message">
+            <p>Chère Maman,</p>
+            <p>Tu mérites tout le bonheur du monde et bien plus encore. J'espère que cette journée sera remplie de joie, de rires et de beaux moments en famille.</p>
+            <p>Merci d'être la maman incroyable que tu es. Je t'aime plus que tout au monde !</p>
+        </div>
+        
+        <p class="signature">Avec tout mon amour,<br>Ton enfant qui t'aime</p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const cakeContainer = document.getElementById('cakeContainer');
+            const numCakes = 15;
+            const numBalloons = 10;
+            const numHearts = 20;
+            
+            for (let i = 0; i < numCakes; i++) {
+                const cake = document.createElement('div');
+                cake.className = 'cake';
+                cake.style.left = Math.random() * 100 + 'vw';
+                cake.style.top = Math.random() * 100 + 'vh';
+                cake.style.animationDuration = (15 + Math.random() * 15) + 's';
+                cake.style.animationDelay = Math.random() * 5 + 's';
+                cakeContainer.appendChild(cake);
+            }
+            
+            for (let i = 0; i < numBalloons; i++) {
+                const balloon = document.createElement('div');
+                balloon.className = 'balloon';
+                balloon.style.left = Math.random() * 100 + 'vw';
+                balloon.style.top = Math.random() * 100 + 'vh';
+                balloon.style.animationDuration = (15 + Math.random() * 10) + 's';
+                balloon.style.animationDelay = Math.random() * 5 + 's';
+                cakeContainer.appendChild(balloon);
+            }
+            
+            for (let i = 0; i < numHearts; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'hearts';
+                heart.innerHTML = '❤';
+                heart.style.left = Math.random() * 100 + 'vw';
+                heart.style.top = Math.random() * 100 + 'vh';
+                heart.style.animationDuration = (10 + Math.random() * 10) + 's';
+                heart.style.animationDelay = Math.random() * 5 + 's';
+                cakeContainer.appendChild(heart);
+            }
+        });
+    </script>
+</body>
+</html>
